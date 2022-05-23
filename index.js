@@ -1,5 +1,5 @@
 const app = require('express')();
-const { existsSync, writeFileSync, readFileSync } = require('fs');
+const { existsSync, writeFileSync, readFileSync, mkdirSync } = require('fs');
 const bP = require('body-parser').json();
 const sha = require('js-sha512').sha512;
 app.use(bP);
@@ -14,21 +14,23 @@ function CreateShortenURL(url) {
         shortURL: sha(link).slice(0, 7)
     }
     var sURL = SavedURL.shortURL;
+    if(!existsSync('./ShortData/')) return mkdirSync('./ShortData/');
     if (existsSync(`./ShortData/${sURL}.json`)) {
         if (!JSON.parse(readFileSync(`./ShortData/${sURL}.json`, 'utf8')).sURL == sURL) {
             sURL = sha(link).slice(0, 8);
         }
     }
     writeFileSync(`./ShortData/${sURL}.json`, JSON.stringify(SavedURL), (err) => { console.log(err) });
-    return "https://localhost:3000/" + sURL;
+    //return "https://ddc.gg/t/" + sURL;
+    return "http://localhost:8069" + sURL;
 };
-app.get('/', (_req, res) => {
+app.get('', (_req, res) => {
     res.sendFile(__dirname + "/index.html");
-});
-app.get('/:sURL', (req, res) => {
-    existsSync(`./ShortData/${req.params.sURL}.json`) ? res.redirect(JSON.parse(readFileSync(`./ShortData/${req.params.sURL}.json`, 'utf8')).url) : res.redirect("/");
 });
 app.post('/create', (req, res) => {
     isURL(req.body.url) ? res.send(CreateShortenURL(req.body.url)) : res.status(400).send("Invalid URL");
 });
-app.listen(3000);
+app.get('/:sURL', (req, res) => {
+    existsSync(`./ShortData/${req.params.sURL}.json`) ? res.redirect(JSON.parse(readFileSync(`./ShortData/${req.params.sURL}.json`, 'utf8')).url) : res.redirect("/");
+});
+app.listen(8069);
