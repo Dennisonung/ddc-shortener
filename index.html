@@ -125,7 +125,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     show.style.display = '';
-                    show.innerHTML = xhr.responseText;
+                    show.innerText = xhr.responseText;
                 }
             }
             var url = document.getElementById('url');
