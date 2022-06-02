@@ -17,10 +17,11 @@
             font-weight:400;
             font-size: 14px;
             color: #eee;
-            margin:8px 0 0 0;
-            background-color: #222;
+            margin:0 0 0 0;
+            background-color: #111;
             min-height: 90vh;
         }
+
         .main {
             max-width: 980px;
             padding:12px;
@@ -107,16 +108,16 @@
     <title>DDC-Shortener</title>
 </head>
 <body>
-    <div class="main">
-        <h1>DDC-Shortener</h1>
-        <h4>This site shortens your link for as long as you need.</h4>
-        <label>Enter Link Here:</label>
-        <input type="text" id="url" name="url">
-        <button class="btn" id="shorten">Shorten NOW!</button>
-        <h2 style="display:none"class="epic-link"id="result"></h2>
-
-
-    </div>  
+    <div style="background-color:#222;margin:0">
+        <div class="main">
+            <h1>DDC-Shortener</h1>
+            <h4>This site shortens your link for as long as you need.</h4>
+            <label>Enter Link Here:</label>
+            <input type="text" id="url" name="url">
+            <button class="btn" id="shorten">Shorten NOW!</button>
+            <h2 style="display:none"class="epic-link"id="result"></h2>
+        </div>  
+    </div>
     <script>
         
         document.getElementById('shorten').onclick = function() {
