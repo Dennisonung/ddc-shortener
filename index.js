@@ -14,11 +14,9 @@ function CreateShortenURL(url) {
         shortURL: sha(link).slice(0, 7)
     }
     var sURL = SavedURL.shortURL;
-    if(!existsSync('./ShortData/')) return mkdirSync('./ShortData/');
+    !existsSync('./ShortData/') || mkdirSync('./ShortData/');
     if (existsSync(`./ShortData/${sURL}.json`)) {
-        if (!JSON.parse(readFileSync(`./ShortData/${sURL}.json`, 'utf8')).sURL == sURL) {
-            sURL = sha(link).slice(0, 8);
-        }
+        !JSON.parse(readFileSync(`./ShortData/${sURL}.json`, 'utf8')).sURL == sURL) || sURL = sha(link).slice(0, 8);
     }
     writeFileSync(`./ShortData/${sURL}.json`, JSON.stringify(SavedURL), (err) => { console.log(err) });
     //return "https://ddc.gg/t/" + sURL;
