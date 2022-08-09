@@ -4,17 +4,17 @@ const bP = require('body-parser').json();
 const sha = require('js-sha512').sha512;
 app.use(bP);
 function isURL(str) {
-    var res = str.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    let res = str.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     return (res !== null)
 };
 function CreateShortenURL(url) {
-    var link = url.slice(0, 4) === 'http' ? url : 'https://' + url;
-    var SavedURL = {
+    let link = url.slice(0, 4) === 'http' ? url : 'https://' + url;
+    let SavedURL = {
         url: link,
         shortURL: sha(link).slice(0, 7)
     }
-    var sURL = SavedURL.shortURL;
-    if(!existsSync('./ShortData/')) return mkdirSync('./ShortData/');
+    let sURL = SavedURL.shortURL;
+    !existsSync('./ShortData/') && mkdirSync('./ShortData/');
     if (existsSync(`./ShortData/${sURL}.json`)) {
         if (!JSON.parse(readFileSync(`./ShortData/${sURL}.json`, 'utf8')).sURL == sURL) {
             sURL = sha(link).slice(0, 8);

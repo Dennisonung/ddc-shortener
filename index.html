@@ -127,6 +127,7 @@
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     show.style.display = '';
                     show.innerText = xhr.responseText;
+                    show.href = xhr.responseText;
                 }
             }
             var url = document.getElementById('url');
