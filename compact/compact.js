@@ -1,1 +1,15 @@
-const app = require('express')();const {writeFileSync, readFileSync} = require('fs');const bP = require('body-parser').json();const sha = require('js-sha512').sha512;app.use(bP);function CreateShortenURL(url) {let link = url.slice(0, 4) === 'http' ? url : 'https://' + url;let SavedURL = {url: link,};writeFileSync(`./ShortData/${sha(link).slice(0, 7)}.json`, JSON.stringify(SavedURL), (err) => { console.log(err) });return "http://localhost:8069/" + sha(link).slice(0, 7);};app.get('', (_req, res) => {res.sendFile(__dirname + "/compact.html");});app.post('/create', (req, res) => {res.send(CreateShortenURL(req.body.url))});app.get('/:sURL', (req, res) => {res.redirect(JSON.parse(readFileSync(`./ShortData/${req.params.sURL}.json`, 'utf8')).url)});app.listen(8069);
+let a=require('express')()
+let j=JSON
+let {existsSync,writeFileSync,readFileSync}=require('fs')
+a.use(require('body-parser').json())
+function g(h){
+let k=h.slice(0,4)==='http'?h:'https://'+h
+let e=require('js-sha512').sha512(k).slice(0,7)
+writeFileSync(`./Data/${e}.json`,j.stringify({u:k}),(err)=>console.log(err))
+return"http://localhost:8069/"+e}
+a.get('/',(r,s)=>s.sendFile(__dirname+"/index.html"))
+a.post('/create',(r,s)=>s.send(g(r.body.url)))
+a.get('/:e',(r,s)=>{
+existsSync(`./Data/${r.params.e}.json`)?s.redirect(j.parse(readFileSync(`./Data/${r.params.e}.json`,'utf8')).u):s.redirect("/")
+})
+a.listen(8069)
