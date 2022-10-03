@@ -1,7 +1,7 @@
 const a = require('express')();
 const { existsSync, writeFileSync, readFileSync, mkdirSync } = require('fs');
 a.use(require('body-parser').json());
-function CreateShortenURL(h) {
+function g(h) {
     let k = h.slice(0, 4) === 'http' ? h : 'https://' + h;
     let e = require('js-sha512').sha512(k).slice(0, 7);
     !existsSync('./ShortData/') && mkdirSync('./ShortData/');
@@ -13,7 +13,7 @@ a.get('/', (_req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 a.post('/create', (req, res) => {
-    (req.body.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)) ? res.send(CreateShortenURL(req.body.url)) : res.status(400).send("Invalid URL");
+    (req.body.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)) ? res.send(g(req.body.url)) : res.status(400).send("Invalid URL");
 });
 a.get('/:e', (req, res) => {
     existsSync(`./ShortData/${req.params.e}.json`) ? res.redirect(JSON.parse(readFileSync(`./ShortData/${req.params.e}.json`, 'utf8')).url) : res.redirect("/");
