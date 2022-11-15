@@ -5,25 +5,24 @@
 <body>
     <h1>DDC-Shortener</h1>
     <label>Enter Link Here:</label>
-    <input type="text" id="url" name="url">
-    <button id="shorten">Shorten NOW!</button>
-    <h2 style="display:none" id="result"></h2>
+    <input type="text" id="u" name="url">
+    <button id="s">Shorten NOW!</button>
+    <h2 style="display:none" id="r"></h2>
     <script>
-        document.getElementById('shorten').onclick = function () {
-            var xhr = new XMLHttpRequest();
-            var show = document.getElementById('result');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == XMLHttpRequest.DONE) {
-                    show.style.display = '';
-                    show.innerText = xhr.responseText;
-                    show.href = xhr.responseText;
+        document.getElementById('s').onclick = function () {
+            var x = new XMLHttpRequest();
+            var q = document.getElementById('r');
+            x.onreadystatechange = function () {
+                if (x.readyState == XMLHttpRequest.DONE) {
+                    q.style.display = '';
+                    q.innerText = x.responseText;
+                    q.href = x.responseText;
                 }
             }
-            var url = document.getElementById('url');
-            xhr.open("POST", "/create", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({
-                url: `${url.value}`
+            x.open("POST", "/c", true);
+            x.setRequestHeader('Content-Type', 'application/json');
+            x.send(JSON.stringify({
+                url: `${document.getElementById('u').value}`
             }));
         }
     </script>
