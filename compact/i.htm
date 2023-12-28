@@ -1,14 +1,12 @@
-<body>
     <input type="text" id="u" name="url">
     <button id="s">Short</button>
-    <h2 style="display:none" id="r"></h2>
+    <h2 id="r">n/a</h2>
     <script>
         document.getElementById('s').onclick = function () {
             var x = new XMLHttpRequest();
             var q = document.getElementById('r');
             x.onreadystatechange = function () {
                 if (x.readyState == XMLHttpRequest.DONE) {
-                    q.style.display = '';
                     q.innerText = x.responseText;
                     q.href = x.responseText;
                 }
@@ -20,4 +18,3 @@
             }));
         }
     </script>
-</body>
