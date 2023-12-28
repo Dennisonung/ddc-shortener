@@ -3,8 +3,8 @@
     <h2 id="r">n/a</h2>
     <script>
         document.getElementById('s').onclick = function () {
-            var x = new XMLHttpRequest();
-            var q = document.getElementById('r');
+            x = new XMLHttpRequest();
+            q = document.getElementById('r');
             x.onreadystatechange = function () {
                 if (x.readyState == XMLHttpRequest.DONE) {
                     q.innerText = x.responseText;
