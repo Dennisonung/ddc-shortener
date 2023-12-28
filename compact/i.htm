@@ -5,16 +5,12 @@
         document.getElementById('s').onclick = function () {
             x = new XMLHttpRequest();
             q = document.getElementById('r');
-            x.onreadystatechange = function () {
-                if (x.readyState == XMLHttpRequest.DONE) {
-                    q.innerText = x.responseText;
-                    q.href = x.responseText;
-                }
-            }
+            z = document.getElementById('u').value;
+            x.onreadystatechange = function () {if (x.readyState == XMLHttpRequest.DONE) q.innerText = x.responseText};
             x.open("POST", "/c", true);
             x.setRequestHeader('Content-Type', 'application/json');
             x.send(JSON.stringify({
-                u: `${document.getElementById('u').value}`
+                u:z
             }));
         }
     </script>
