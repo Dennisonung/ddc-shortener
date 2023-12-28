@@ -5,7 +5,7 @@
         document.getElementById('s').onclick = function () {
             x = new XMLHttpRequest();
             x.onreadystatechange = function () {if(x.readyState==XMLHttpRequest.DONE) document.getElementById('r').innerText = x.responseText};
-            x.open("POST", "/c", true);
+            x.open("POST", "/c");
             x.setRequestHeader('Content-Type','text/plain');
             x.send(document.getElementById('u').value);
         }
