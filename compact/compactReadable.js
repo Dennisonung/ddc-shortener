@@ -1,9 +1,7 @@
-a=require
-b=a('express')
-e=b()
-e.use(b.text())
-g=a('fs')
-e.get('',(r,s)=>s.sendFile(__dirname+"/i.htm"))
-e.post('/c',(r,s)=>{d=r.body;e=a('md5')(d);g.writeFileSync(e,d);s.send(e)})
-e.get('/:e',(r,s)=>s.redirect(g.readFileSync(r.params.e)))
-e.listen(8069)
+a=require;
+b=a('express');
+b().use(
+    b.text()
+).get('/',(r,s)=>s.sendFile(__dirname+'/i.htm')).post('/c',(r,s)=>{
+    d=r.body;h=a('md5')(d);a('fs').writeFileSync(h,d);s.send(h)
+}).get('/:h',(r,s)=>s.redirect(a('fs').readFileSync(r.params.h))).listen(8069)
